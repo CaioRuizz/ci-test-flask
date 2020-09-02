@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup environment
+        run: |
+          chmod +x $GITHUB_WORKSPACE/ci/setup_env.sh
+          $GITHUB_WORKSPACE/ci/setup_env.sh
+      - name: Run tests
+        run: |
+          chmod +x $GITHUB_WORKSPACE/ci/test.sh
+          $GITHUB_WORKSPACE/ci/test.sh
+#   deploy:
+#     needs: test
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - uses: actions/checkout@v2
+      
+#       - name: Configure AWS Credentials
+#         uses: aws-actions/configure-aws-credentials@v1
+#         with:
+#           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#           aws-region: us-east-1
+
+#       - name: Setup environment
+#         run: |
+#           chmod +x $GITHUB_WORKSPACE/ci/setup_env.sh
+#           $GITHUB_WORKSPACE/ci/setup_env.sh
+      
+#       - name: Build application
+#         run: |
+#           chmod +x $GITHUB_WORKSPACE/ci/build.sh
+#           $GITHUB_WORKSPACE/ci/build.sh
+#       - name: Deploy application
+#         run: |
+#           chmod +x $GITHUB_WORKSPACE/ci/deploy.sh
+#           $GITHUB_WORKSPACE/ci/deploy.sh
