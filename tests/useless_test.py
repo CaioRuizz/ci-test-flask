@@ -7,5 +7,5 @@ class TestUseless(unittest.TestCase):
 
     def test_useless(self):
         """Useless Test"""
-        self.assertEqual(3, 4)
+        self.assertEqual(4, 4)
     
