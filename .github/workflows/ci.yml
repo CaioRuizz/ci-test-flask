@@ -10,6 +10,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - name: Hello world
+        run: echo Hello world $FIRST_NAME $middle_name $Last_Name!
+        env:
+          FIRST_NAME: Mona
+          middle_name: The
+          Last_Name: Octocat
 
       - name: Setup environment
         run: |
@@ -19,15 +25,12 @@ jobs:
         run: |
           chmod +x $GITHUB_WORKSPACE/ci/test.sh
           $GITHUB_WORKSPACE/ci/test.sh
-  deploy:
-    needs: test
-    runs-on: jonaskello/docker-and-compose
+#   deploy:
+#     needs: test
+#     runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v2
-      - name: Run tests
-        run: |
-          echo $DOCKER_CERT_PATH
+#     steps:
+#       - uses: actions/checkout@v2
       
 #       - name: Configure AWS Credentials
 #         uses: aws-actions/configure-aws-credentials@v1
