@@ -21,7 +21,7 @@ jobs:
           $GITHUB_WORKSPACE/ci/test.sh
   deploy:
     needs: test
-    runs-on: jonaskello/docker-and-compose:1.12.1-1.8.0
+    runs-on: jonaskello/docker-and-compose
 
     steps:
       - uses: actions/checkout@v2
