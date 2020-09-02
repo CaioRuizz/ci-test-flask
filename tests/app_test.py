@@ -10,3 +10,8 @@ class TestApp(unittest.TestCase):
         random_string = "This is my test string"
         random_string_reversed = "gnirts tset ym si sihT"
         self.assertEqual(random_string_reversed, app.returnBackwardsString(random_string))
+    
+    def test_index(self):
+        """Test index"""
+        expected_return = "Hello World!"
+        self.assertEqual(expected_return, app.index())
