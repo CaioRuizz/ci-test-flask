@@ -1,5 +1,6 @@
 #!/bin/bash -e
-export DOCKER_TLS_VERIFY="1"
-export DOCKER_HOST="tcp://52.91.9.91:2376"
-export DOCKER_MACHINE_NAME="docker-compose-test"
-export DOCKER_CERT_PATH="certs"
+
+mkdir $DOCKER_CERT_PATH
+echo "${{ secrets.CA }}" > $DOCKER_CERT_PATH/ca.pem
+echo "${{ secrets.CLIENT_CERT }}" > $DOCKER_CERT_PATH/cert.pem
+echo "${{ secrets.CLIENT_KEY }}" > $DOCKER_CERT_PATH/key.pem

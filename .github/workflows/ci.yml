@@ -12,10 +12,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Hello world
         run: echo Hello world $FIRST_NAME $middle_name $Last_Name!
-        env:
-          FIRST_NAME: Mona
-          middle_name: The
-          Last_Name: Octocat
+        
 
       - name: Setup environment
         run: |
@@ -25,30 +22,33 @@ jobs:
         run: |
           chmod +x $GITHUB_WORKSPACE/ci/test.sh
           $GITHUB_WORKSPACE/ci/test.sh
-#   deploy:
-#     needs: test
-#     runs-on: ubuntu-latest
 
-#     steps:
-#       - uses: actions/checkout@v2
-      
-#       - name: Configure AWS Credentials
-#         uses: aws-actions/configure-aws-credentials@v1
-#         with:
-#           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-#           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-#           aws-region: us-east-1
 
-#       - name: Setup environment
-#         run: |
-#           chmod +x $GITHUB_WORKSPACE/ci/setup_env.sh
-#           $GITHUB_WORKSPACE/ci/setup_env.sh
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
       
-#       - name: Build application
-#         run: |
-#           chmod +x $GITHUB_WORKSPACE/ci/build.sh
-#           $GITHUB_WORKSPACE/ci/build.sh
-#       - name: Deploy application
-#         run: |
-#           chmod +x $GITHUB_WORKSPACE/ci/deploy.sh
-#           $GITHUB_WORKSPACE/ci/deploy.sh
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+      
+      - name: Build application
+        run: |
+          chmod +x $GITHUB_WORKSPACE/ci/build.sh
+          $GITHUB_WORKSPACE/ci/build.sh
+          
+      - name: Deploy application
+        run: |
+          chmod +x $GITHUB_WORKSPACE/ci/deploy.sh
+          $GITHUB_WORKSPACE/ci/deploy.sh
+        env:
+          DOCKER_TLS_VERIFY: "1"
+          DOCKER_HOST: "tcp://52.91.9.91:2376"
+          DOCKER_MACHINE_NAME: "docker-compose-test"
+          DOCKER_CERT_PATH: "certs"
