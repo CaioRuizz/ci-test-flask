@@ -42,7 +42,12 @@ jobs:
         run: |
           chmod +x $GITHUB_WORKSPACE/ci/build.sh
           $GITHUB_WORKSPACE/ci/build.sh
-          
+        env:
+          DOCKER_TLS_VERIFY: "1"
+          DOCKER_HOST: "tcp://52.91.9.91:2376"
+          DOCKER_MACHINE_NAME: "docker-compose-test"
+          DOCKER_CERT_PATH: "certs"
+
       - name: Deploy application
         run: |
           chmod +x $GITHUB_WORKSPACE/ci/deploy.sh
