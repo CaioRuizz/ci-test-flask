@@ -13,19 +13,21 @@ jobs:
 
       - name: Setup environment
         run: |
-          echo ---$DOCKER_CERT_PATH---
           chmod +x $GITHUB_WORKSPACE/ci/setup_env.sh
           $GITHUB_WORKSPACE/ci/setup_env.sh
       - name: Run tests
         run: |
           chmod +x $GITHUB_WORKSPACE/ci/test.sh
           $GITHUB_WORKSPACE/ci/test.sh
-#   deploy:
-#     needs: test
-#     runs-on: ubuntu-latest
+  deploy:
+    needs: test
+    runs-on: jonaskello/docker-and-compose:1.12.1-1.8.0
 
-#     steps:
-#       - uses: actions/checkout@v2
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup environment
+          run: |
+            echo $DOCKER_CERT_PATH
       
 #       - name: Configure AWS Credentials
 #         uses: aws-actions/configure-aws-credentials@v1
