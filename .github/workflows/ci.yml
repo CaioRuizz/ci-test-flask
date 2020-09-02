@@ -25,9 +25,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Setup environment
-          run: |
-            echo $DOCKER_CERT_PATH
+      - name: Run tests
+        run: |
+          echo $DOCKER_CERT_PATH
       
 #       - name: Configure AWS Credentials
 #         uses: aws-actions/configure-aws-credentials@v1
