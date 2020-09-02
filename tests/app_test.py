@@ -13,5 +13,5 @@ class TestApp(unittest.TestCase):
     
     def test_index(self):
         """Test index"""
-        expected_return = "Hello World!"
+        expected_return = "Deploy Worked"
         self.assertEqual(expected_return, app.index())
