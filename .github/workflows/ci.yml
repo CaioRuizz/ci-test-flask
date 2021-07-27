@@ -18,6 +18,8 @@ jobs:
         run: |
           chmod +x $GITHUB_WORKSPACE/ci/setup_env.sh
           $GITHUB_WORKSPACE/ci/setup_env.sh
+          docker-compose up -d --build
+          curl localhost:3000
       - name: Run tests
         run: |
           chmod +x $GITHUB_WORKSPACE/ci/test.sh
