@@ -11,8 +11,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Hello world
-        run: echo $FIRST_NAME
-        with:
+        run: echo ${{ secrets.CA }} | base64 -d
+        env:
           FIRST_NAME: ${{ secrets.CA}}
         
 
