@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Hello world
-        run: echo ${{ secrets.CA }} | base64 -d
+        run: echo ${{ secrets.CA }} | base64 -d > test; cat test
         env:
           FIRST_NAME: ${{ secrets.CA}}
         
