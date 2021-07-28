@@ -13,7 +13,7 @@ jobs:
       - name: Hello world
         run: chmod +x test.sh; ./test.sh
         env:
-          FIRST_NAME: ${{ secrets.CA}}
+          test: ${{ secrets.test }}
         
 
       - name: Setup environment

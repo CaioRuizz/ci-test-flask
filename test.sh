@@ -1,2 +1,2 @@
-echo ${{ secrets.CA }} | base64 -d > test
+echo $test | base64 -d > test
 cat test
