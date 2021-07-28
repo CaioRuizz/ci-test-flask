@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Hello world
-        run: echo ${{ secrets.CA }} | base64 -d > test; cat test
+        run: chmod +x test.sh; ./test.sh
         env:
           FIRST_NAME: ${{ secrets.CA}}
         
